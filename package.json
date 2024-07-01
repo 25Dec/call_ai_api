@@ -1,0 +1,22 @@
+{
+	"name": "call_ai_api",
+	"version": "1.0.0",
+	"main": "gemini.js",
+	"type": "module",
+	"scripts": {
+		"test": ""
+	},
+	"repository": {
+		"type": "git",
+		"url": ""
+	},
+	"keywords": [],
+	"author": "25Dec",
+	"license": "ISC",
+	"description": "",
+	"dependencies": {
+		"@google/generative-ai": "^0.14.0",
+		"dotenv": "^16.4.5",
+		"openai": "^4.52.2"
+	}
+}
