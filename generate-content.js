@@ -1,4 +1,19 @@
+import { createRequire } from 'module';
 import { Client, logger } from 'camunda-external-task-client-js';
+
+const require = createRequire(import.meta.url);
+const dotenv = require('dotenv').config();
+const { GoogleGenerativeAI } = require('@google/generative-ai');
+const genAI = new GoogleGenerativeAI(process.env.API_KEY);
+const model = genAI.getGenerativeModel({ model: 'gemini-1.5-flash' });
+
+export const gemini = async (prompt) => {
+	const result = await model.generateContent(prompt);
+	const response = await result.response;
+	const text = response.text();
+
+	console.log(text);
+};
 
 // configuration for the Client:
 //  - 'baseUrl': url to the Process Engine
@@ -12,7 +27,7 @@ const config = {
 const client = new Client(config);
 
 client.subscribe('GenerateConTent', async function ({ task, taskService }) {
-	await gemini('Tạo danh sách từ khóa theo chủ đề thú cưng');
+	await gemini('Viet cho toi bai viet 100 chu ve tu khoa: Cac buoc tay trang');
 	// complete the task
 	try {
 		await taskService.complete(task);
